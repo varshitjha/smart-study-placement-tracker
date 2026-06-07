@@ -1,0 +1,104 @@
+/* ============================================
+   css/study.css
+   Styles for the Study Tracker page and
+   the StudyForm component.
+   ============================================ */
+
+/* ---- StudyForm Card ---- */
+.study-form-card {
+  background:    var(--color-card);
+  border:        1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding:       var(--space-lg);
+  margin-bottom: var(--space-xl);
+  box-shadow:    var(--shadow-sm);
+}
+
+.study-form-title {
+  font-size:     1rem;
+  font-weight:   700;
+  color:         var(--color-text);
+  margin-bottom: var(--space-md);
+}
+
+.study-form {
+  display:        flex;
+  flex-direction: column;
+}
+
+/* ---- Sessions List Section ---- */
+.study-sessions-section {
+  /* Container for the section title + table */
+}
+
+/* Badge showing total session count next to the section title */
+.session-count-badge {
+  background:    var(--color-primary-light);
+  color:         var(--color-primary);
+  font-size:     0.75rem;
+  font-weight:   700;
+  padding:       2px 10px;
+  border-radius: var(--radius-full);
+}
+
+/* ---- Table Cell Styles ---- */
+
+/* Row number column */
+.row-number {
+  color:     var(--color-text-muted);
+  font-size: 0.8rem;
+  width:     40px;
+}
+
+/* Colored pill for subject name */
+.subject-pill {
+  background:    var(--color-primary-light);
+  color:         var(--color-primary);
+  padding:       3px 10px;
+  border-radius: var(--radius-full);
+  font-size:     0.8rem;
+  font-weight:   600;
+  white-space:   nowrap;
+}
+
+/* Duration shown prominently */
+.duration-cell {
+  font-weight: 700;
+  color:       var(--color-primary);
+  font-size:   0.9rem;
+}
+
+/* Date cell */
+.date-cell {
+  color:      var(--color-text-secondary);
+  font-size:  0.85rem;
+  white-space: nowrap;
+}
+
+/* Notes cell — truncated if long */
+.notes-cell {
+  color:         var(--color-text-secondary);
+  font-size:     0.85rem;
+  max-width:     280px;
+  white-space:   nowrap;
+  overflow:      hidden;
+  text-overflow: ellipsis;
+}
+
+/* Placeholder for empty notes */
+.no-notes {
+  color: var(--color-text-muted);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .study-form-card {
+    padding: var(--space-md);
+  }
+
+  /* Hide notes column on small screens */
+  .data-table th:last-child,
+  .data-table td:last-child {
+    display: none;
+  }
+}

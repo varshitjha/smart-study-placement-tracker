@@ -1,0 +1,316 @@
+/* ============================================
+   css/layout.css
+   Main layout: sidebar, top navbar, and the
+   page content area. Used on all dashboard pages.
+   ============================================ */
+
+/* ---- App Shell ---- */
+/* The outer wrapper. Sidebar sits on the left, main-area fills the rest. */
+.app-layout {
+  display:    flex;
+  min-height: 100vh;
+  background: var(--color-bg);
+}
+
+/* ---- Main Area ---- */
+/* Everything to the right of the sidebar */
+.main-area {
+  flex:           1;
+  margin-left:    var(--sidebar-width);
+  display:        flex;
+  flex-direction: column;
+  min-height:     100vh;
+  min-width:      0; /* Prevents overflow issues with flex */
+}
+
+/* ---- Page Content ---- */
+/* The scrollable body below the top navbar */
+.page-content {
+  flex:       1;
+  padding:    var(--space-xl);
+  margin-top: var(--topbar-height); /* Push below the fixed top navbar */
+  overflow-y: auto;
+  max-width:  1200px;
+  width:      100%;
+}
+
+/* ---- Page Header ---- */
+.page-header {
+  margin-bottom: var(--space-xl);
+}
+
+.page-title {
+  font-size:    1.6rem;
+  font-weight:  800;
+  color:        var(--color-text);
+  letter-spacing: -0.4px;
+}
+
+.page-subtitle {
+  font-size:  0.9rem;
+  color:      var(--color-text-secondary);
+  margin-top: 4px;
+}
+
+/* ============================================
+   SIDEBAR
+   ============================================ */
+.sidebar {
+  position:       fixed;
+  top:            0;
+  left:           0;
+  width:          var(--sidebar-width);
+  height:         100vh;
+  background:     var(--sidebar-bg);
+  display:        flex;
+  flex-direction: column;
+  z-index:        100;
+  overflow-y:     auto;
+}
+
+/* Logo / Brand area */
+.sidebar-logo {
+  display:       flex;
+  align-items:   center;
+  gap:           12px;
+  padding:       22px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.sidebar-logo-icon {
+  width:            36px;
+  height:           36px;
+  background:       var(--color-primary);
+  border-radius:    var(--radius);
+  display:          flex;
+  align-items:      center;
+  justify-content:  center;
+  font-size:        0.85rem;
+  font-weight:      800;
+  color:            white;
+  flex-shrink:      0;
+  letter-spacing:   -0.5px;
+}
+
+.sidebar-logo-text {
+  display:        flex;
+  flex-direction: column;
+}
+
+.sidebar-logo-name {
+  font-size:   0.95rem;
+  font-weight: 800;
+  color:       white;
+}
+
+.sidebar-logo-tagline {
+  font-size:      0.65rem;
+  color:          var(--sidebar-text);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight:    500;
+  margin-top:     1px;
+}
+
+/* Section label above nav links */
+.sidebar-section-label {
+  font-size:      0.65rem;
+  font-weight:    700;
+  color:          rgba(148, 163, 184, 0.45);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding:        14px 18px 8px;
+}
+
+/* Navigation links */
+.sidebar-nav {
+  flex:    1;
+  padding: 8px 10px;
+}
+
+.sidebar-link {
+  display:     flex;
+  align-items: center;
+  gap:         10px;
+  padding:     10px 10px;
+  border-radius: var(--radius);
+  color:       var(--sidebar-text);
+  font-size:   0.875rem;
+  font-weight: 500;
+  transition:  var(--transition);
+  margin-bottom: 2px;
+}
+
+.sidebar-link:hover {
+  background: rgba(255,255,255,0.06);
+  color:      white;
+}
+
+/* Active link — highlighted with primary color accent */
+.sidebar-link--active {
+  background:   rgba(79,70,229,0.16);
+  color:        #A5B4FC; /* Light indigo */
+  font-weight:  600;
+}
+
+.sidebar-link-icon {
+  font-size:  1rem;
+  width:      22px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.sidebar-link-label {
+  font-size: 0.875rem;
+}
+
+/* Footer area with Logout button */
+.sidebar-footer {
+  padding:       12px 10px 20px;
+  border-top:    1px solid rgba(255,255,255,0.06);
+  margin-top:    auto;
+}
+
+.sidebar-logout-btn {
+  display:       flex;
+  align-items:   center;
+  gap:           10px;
+  padding:       10px 10px;
+  border-radius: var(--radius);
+  color:         #F87171; /* Light red */
+  font-size:     0.875rem;
+  font-weight:   500;
+  width:         100%;
+  transition:    var(--transition);
+  background:    transparent;
+  border:        none;
+  cursor:        pointer;
+}
+
+.sidebar-logout-btn:hover {
+  background: rgba(239,68,68,0.12);
+}
+
+/* ============================================
+   TOP NAVBAR
+   ============================================ */
+.navbar {
+  position:        fixed;
+  top:             0;
+  left:            var(--sidebar-width);
+  right:           0;
+  height:          var(--topbar-height);
+  background:      rgba(248,250,252,0.95);
+  backdrop-filter: blur(8px);
+  border-bottom:   1px solid var(--color-border);
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  padding:         0 var(--space-xl);
+  z-index:         90;
+}
+
+.navbar-page-title {
+  font-size:    1.05rem;
+  font-weight:  800;
+  color:        var(--color-text);
+  letter-spacing: -0.3px;
+}
+
+.navbar-right {
+  display:     flex;
+  align-items: center;
+  gap:         12px;
+}
+
+.navbar-user {
+  display:     flex;
+  align-items: center;
+  gap:         10px;
+}
+
+/* Avatar circle — shows first letter of name */
+.navbar-avatar {
+  width:            36px;
+  height:           36px;
+  background:       var(--color-primary);
+  color:            white;
+  border-radius:    var(--radius);
+  display:          flex;
+  align-items:      center;
+  justify-content:  center;
+  font-size:        0.875rem;
+  font-weight:      800;
+  cursor:           default;
+}
+
+.navbar-username {
+  font-size:   0.875rem;
+  font-weight: 600;
+  color:       var(--color-text);
+}
+
+/* ============================================
+   SPINNER
+   ============================================ */
+.spinner-container {
+  display:         flex;
+  flex-direction:  column;
+  align-items:     center;
+  justify-content: center;
+  padding:         48px 32px;
+  gap:             16px;
+}
+
+.spinner {
+  width:        40px;
+  height:       40px;
+  border:       3px solid var(--color-border);
+  border-top:   3px solid var(--color-primary);
+  border-radius: 50%;
+  animation:    spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner-text {
+  font-size:  0.85rem;
+  color:      var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  :root {
+    --sidebar-width:  0px;
+    --topbar-height:  56px;
+  }
+
+  .sidebar {
+    transform:  translateX(-100%);
+    /* Future enhancement: add JS toggle for mobile menu */
+  }
+
+  .main-area {
+    margin-left: 0;
+  }
+
+  .navbar {
+    left: 0;
+    padding: 0 var(--space-md);
+  }
+
+  .page-content {
+    padding: var(--space-md);
+  }
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --sidebar-width: 200px;
+  }
+}

@@ -1,0 +1,126 @@
+/* ============================================
+   css/placement.css
+   Styles for the Placement Tracker page and
+   the PlacementForm component.
+   ============================================ */
+
+/* ---- PlacementForm Card ---- */
+.placement-form-card {
+  background:    var(--color-card);
+  border:        1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding:       var(--space-lg);
+  margin-bottom: var(--space-xl);
+  box-shadow:    var(--shadow-sm);
+}
+
+.placement-form-title {
+  font-size:     1rem;
+  font-weight:   700;
+  color:         var(--color-text);
+  margin-bottom: var(--space-md);
+}
+
+.placement-form {
+  display:        flex;
+  flex-direction: column;
+}
+
+/* Grid layout for the 7 input fields: 3-column grid */
+.placement-form-grid {
+  display:               grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:                   16px;
+  margin-bottom:         var(--space-md);
+}
+
+/* ---- Current Progress Display ---- */
+.placement-current {
+  /* Wrapper for the stats display below the form */
+}
+
+/* Grid of 3 stat groups */
+.placement-stats-grid {
+  display:               grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:                   var(--space-md);
+}
+
+/* Individual group card (DSA, Projects, Other) */
+.placement-stat-group {
+  background:    var(--color-card);
+  border:        1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding:       var(--space-md);
+  box-shadow:    var(--shadow-sm);
+}
+
+/* Group heading (e.g. "💻 DSA Problems") */
+.stat-group-title {
+  font-size:     0.85rem;
+  font-weight:   700;
+  color:         var(--color-text);
+  margin-bottom: var(--space-md);
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+/* Each row inside a group */
+.stat-row {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  padding:         8px 0;
+  border-bottom:   1px solid var(--color-border-light);
+}
+
+.stat-row:last-child {
+  border-bottom: none;
+}
+
+/* Total row has slightly different styling */
+.stat-row--total {
+  margin-top:    6px;
+  padding-top:   10px;
+  border-top:    1.5px solid var(--color-border);
+  border-bottom: none;
+}
+
+.stat-label {
+  font-size:  0.85rem;
+  color:      var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size:   0.95rem;
+  font-weight: 700;
+  color:       var(--color-text);
+}
+
+/* Highlighted total value */
+.stat-value--highlight {
+  color:      var(--color-primary);
+  font-size:  1.05rem;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .placement-form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .placement-stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .placement-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .placement-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

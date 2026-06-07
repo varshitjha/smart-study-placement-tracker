@@ -1,0 +1,93 @@
+/* ============================================
+   css/auth.css
+   Styles for Login and Register pages.
+   These pages don't use the sidebar layout —
+   they are centered full-screen forms.
+   ============================================ */
+
+/* Full-screen centered layout */
+.auth-page {
+  min-height:      100vh;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  background:      var(--color-bg);
+  padding:         var(--space-md);
+}
+
+/* The white card containing the form */
+.auth-card {
+  width:         100%;
+  max-width:     420px;
+  background:    var(--color-card);
+  border-radius: var(--radius-lg);
+  border:        1px solid var(--color-border);
+  box-shadow:    var(--shadow-md);
+  padding:       var(--space-xl) var(--space-xl);
+}
+
+/* Header area at the top of the card */
+.auth-header {
+  text-align:    center;
+  margin-bottom: var(--space-xl);
+}
+
+/* Logo circle */
+.auth-logo {
+  width:            52px;
+  height:           52px;
+  background:       var(--color-primary);
+  color:            white;
+  border-radius:    var(--radius-md);
+  display:          flex;
+  align-items:      center;
+  justify-content:  center;
+  font-size:        1rem;
+  font-weight:      900;
+  margin:           0 auto var(--space-md);
+  box-shadow:       0 4px 12px rgba(79,70,229,0.3);
+  letter-spacing:   -0.5px;
+}
+
+.auth-title {
+  font-size:    1.5rem;
+  font-weight:  800;
+  color:        var(--color-text);
+  margin-bottom: 6px;
+  letter-spacing: -0.3px;
+}
+
+.auth-subtitle {
+  font-size: 0.875rem;
+  color:     var(--color-text-secondary);
+}
+
+/* The form inside the card */
+.auth-form {
+  display:        flex;
+  flex-direction: column;
+}
+
+/* Link to register/login at the bottom */
+.auth-footer-text {
+  text-align:  center;
+  margin-top:  var(--space-lg);
+  font-size:   0.875rem;
+  color:       var(--color-text-secondary);
+}
+
+.auth-link {
+  color:       var(--color-primary);
+  font-weight: 600;
+  transition:  var(--transition);
+}
+
+.auth-link:hover {
+  color:           var(--color-primary-dark);
+  text-decoration: underline;
+}
+
+/* Submit button gets extra top margin inside auth form */
+.auth-form .btn-primary {
+  margin-top: var(--space-sm);
+}
