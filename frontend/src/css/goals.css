@@ -1,0 +1,123 @@
+/* src/css/goals.css
+   Styles for the Weekly Goals page and GoalCard component */
+
+/* ---- GoalCard ---- */
+.goal-card {
+  background:    var(--color-card);
+  border:        1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding:       var(--space-lg);
+  box-shadow:    var(--shadow-sm);
+  height:        100%;
+}
+
+.goal-card--empty {
+  display:     flex;
+  align-items: center;
+  gap:         var(--space-md);
+  color:       var(--color-text-secondary);
+}
+
+.goal-card-icon { font-size: 2rem; }
+
+.goal-card-header {
+  display:         flex;
+  justify-content: space-between;
+  align-items:     flex-start;
+  margin-bottom:   var(--space-sm);
+}
+
+.goal-card-title { font-size: 0.95rem; font-weight: 700; color: var(--color-text); }
+.goal-card-sub   { font-size: 0.8rem;  color: var(--color-text-muted); margin-top: 2px; }
+
+.goal-card-percent {
+  font-size:   1.4rem;
+  font-weight: 900;
+  font-family: 'Courier New', monospace;
+  line-height: 1;
+}
+
+.goal-card-numbers {
+  display:     flex;
+  align-items: baseline;
+  gap:         4px;
+  margin:      8px 0 12px;
+}
+
+.goal-card-done   { font-size: 1.8rem; font-weight: 900; font-family: 'Courier New', monospace; }
+.goal-card-sep    { font-size: 1.1rem; color: var(--color-text-muted); }
+.goal-card-target { font-size: 0.88rem; color: var(--color-text-secondary); font-weight: 500; }
+
+.goal-progress-track {
+  width:         100%;
+  height:        10px;
+  background:    var(--color-bg-dark);
+  border-radius: 9999px;
+  overflow:      hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.goal-progress-fill {
+  height:        100%;
+  border-radius: 9999px;
+  transition:    width 0.5s ease;
+}
+
+.goal-card-status {
+  font-size:  0.8rem;
+  color:      var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* ---- Goals Page Form ---- */
+.goals-form-card {
+  background:    var(--color-card);
+  border:        1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding:       var(--space-lg);
+  margin-bottom: var(--space-lg);
+  box-shadow:    var(--shadow-sm);
+}
+
+.goals-form-title {
+  font-size:     1rem;
+  font-weight:   700;
+  color:         var(--color-text);
+  margin-bottom: var(--space-md);
+}
+
+.goals-form { display: flex; flex-direction: column; }
+
+/* Preset buttons */
+.goals-presets { margin-bottom: var(--space-md); }
+.goals-presets-label { font-size: 0.82rem; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 8px; }
+
+.goals-presets-row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.goals-preset-btn {
+  padding:       6px 14px;
+  border:        1.5px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size:     0.82rem;
+  font-weight:   600;
+  color:         var(--color-text-secondary);
+  background:    transparent;
+  cursor:        pointer;
+  transition:    all 0.18s ease;
+}
+.goals-preset-btn:hover { border-color: var(--color-primary); color: var(--color-primary); }
+.goals-preset-btn--active { border-color: var(--color-primary); color: white; background: var(--color-primary); }
+
+.goals-target-input { max-width: 200px; }
+
+/* Tip box */
+.goals-tip {
+  display:       flex;
+  gap:           12px;
+  background:    var(--color-primary-light);
+  border:        1px solid rgba(79,70,229,0.15);
+  border-radius: var(--radius);
+  padding:       14px 16px;
+}
+.goals-tip-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+.goals-tip p { font-size: 0.84rem; color: var(--color-text-secondary); line-height: 1.5; }

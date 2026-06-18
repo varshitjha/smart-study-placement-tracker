@@ -1,0 +1,152 @@
+/* src/css/resume.css
+   Styles for Resume Analyzer page, ResumeUpload, and ResumeScoreCard components */
+
+/* ---- How it works banner ---- */
+.resume-how-it-works {
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  gap:             8px;
+  background:      var(--color-card);
+  border:          1px solid var(--color-border);
+  border-radius:   var(--radius-md);
+  padding:         16px 20px;
+  margin-bottom:   var(--space-lg);
+  flex-wrap:       wrap;
+}
+
+.rhiw-item {
+  display:         flex;
+  flex-direction:  column;
+  align-items:     center;
+  gap:             4px;
+  min-width:       70px;
+}
+.rhiw-item span { font-size: 1.5rem; }
+.rhiw-item p    { font-size: 0.75rem; font-weight: 600; color: var(--color-text-secondary); text-align: center; }
+.rhiw-arrow     { font-size: 1.1rem; color: var(--color-text-muted); }
+
+/* ---- Upload Area ---- */
+.resume-upload-area {
+  border:          2px dashed var(--color-border);
+  border-radius:   var(--radius-md);
+  padding:         48px 32px;
+  text-align:      center;
+  cursor:          pointer;
+  background:      var(--color-card);
+  transition:      all 0.2s ease;
+  display:         flex;
+  flex-direction:  column;
+  align-items:     center;
+  gap:             8px;
+}
+.resume-upload-area:hover {
+  border-color: var(--color-primary);
+  background:   var(--color-primary-light);
+}
+.resume-upload-area--dragging {
+  border-color: var(--color-primary);
+  background:   var(--color-primary-light);
+  transform:    scale(1.01);
+}
+.resume-upload-area--uploading {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.resume-upload-icon  { font-size: 2.5rem; }
+.resume-upload-label { font-size: 0.95rem; font-weight: 600; color: var(--color-text); }
+.resume-upload-sub   { font-size: 0.82rem; color: var(--color-text-muted); }
+.resume-upload-filename { font-size: 0.78rem; color: var(--color-primary); font-weight: 500; margin-top: 4px; }
+
+/* Upload spinner */
+.resume-upload-spinner {
+  width: 32px; height: 32px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+/* ---- Score Card ---- */
+.resume-score-card {
+  background:    var(--color-card);
+  border:        1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding:       var(--space-lg);
+  box-shadow:    var(--shadow-sm);
+}
+
+.rsc-header {
+  display:     flex;
+  align-items: center;
+  gap:         var(--space-lg);
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.rsc-score-circle {
+  width:          96px; height: 96px;
+  border:         4px solid;
+  border-radius:  50%;
+  display:        flex;
+  flex-direction: column;
+  align-items:    center;
+  justify-content: center;
+  flex-shrink:    0;
+}
+.rsc-score-num  { font-size: 1.8rem; font-weight: 900; font-family: 'Courier New', monospace; line-height: 1; }
+.rsc-score-100  { font-size: 0.72rem; color: var(--color-text-muted); }
+
+.rsc-title    { font-size: 1.1rem; font-weight: 800; color: var(--color-text); margin-bottom: 6px; }
+.rsc-label    { display: inline-block; padding: 3px 12px; border-radius: 9999px; font-size: 0.8rem; font-weight: 700; margin-bottom: 6px; }
+.rsc-filename { font-size: 0.82rem; color: var(--color-text-secondary); margin-bottom: 2px; }
+.rsc-date     { font-size: 0.78rem; color: var(--color-text-muted); }
+
+.rsc-section       { margin-bottom: var(--space-md); }
+.rsc-section-title { font-size: 0.88rem; font-weight: 700; color: var(--color-text); margin-bottom: 10px; }
+
+/* Checklist */
+.rsc-breakdown  { margin-bottom: var(--space-md); }
+.rsc-checks     { display: flex; flex-direction: column; gap: 6px; }
+.rsc-check-item {
+  display:       flex;
+  align-items:   center;
+  gap:           10px;
+  font-size:     0.85rem;
+  padding:       6px 12px;
+  border-radius: var(--radius-sm);
+  font-weight:   500;
+}
+.rsc-check--pass { background: #ECFDF5; color: #065F46; }
+.rsc-check--fail { background: #FEF2F2; color: #991B1B; }
+.rsc-check-icon  { font-weight: 900; width: 16px; text-align: center; }
+
+/* Skills pills */
+.rsc-skills-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+.rsc-skill {
+  padding: 4px 12px; border-radius: 9999px;
+  font-size: 0.78rem; font-weight: 600;
+}
+.rsc-skill--found   { background: #ECFDF5; color: #065F46; }
+.rsc-skill--missing { background: #FEF2F2; color: #991B1B; }
+
+/* Suggestions list */
+.rsc-suggestions { display: flex; flex-direction: column; gap: 8px; padding-left: 0; list-style: none; }
+.rsc-suggestion-item {
+  display:     flex;
+  align-items: flex-start;
+  gap:         10px;
+  font-size:   0.85rem;
+  color:       var(--color-text);
+  line-height: 1.5;
+}
+.rsc-suggestion-num {
+  width:         22px; height: 22px; flex-shrink: 0;
+  background:    var(--color-primary-light);
+  color:         var(--color-primary);
+  border-radius: 50%;
+  display:       flex; align-items: center; justify-content: center;
+  font-size:     0.72rem; font-weight: 700;
+}
