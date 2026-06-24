@@ -12,20 +12,22 @@ const {
   analyzeResume,
   getLatestAnalysis,
   getAnalysisHistory,
+  matchJobDescription,
   uploadMiddleware,
 } = require('../controllers/resumeController')
 
 const { protect } = require('../middleware/authMiddleware')
 
-// POST /api/resume/analyze   → Upload PDF + run analysis
-// uploadMiddleware runs first (handles the multipart/form-data file upload)
-// then protect checks the JWT, then analyzeResume runs the analysis
-router.post('/analyze',  uploadMiddleware, protect, analyzeResume)
+// POST /api/resume/analyze
+router.post('/analyze', uploadMiddleware, protect, analyzeResume)
 
-// GET  /api/resume/latest    → Get the most recent analysis result
-router.get('/latest',   protect, getLatestAnalysis)
+// POST /api/resume/job-match
+router.post('/job-match', uploadMiddleware, protect, matchJobDescription)
 
-// GET  /api/resume/history   → Get list of all past analyses
-router.get('/history',  protect, getAnalysisHistory)
+// GET /api/resume/latest
+router.get('/latest', protect, getLatestAnalysis)
+
+// GET /api/resume/history
+router.get('/history', protect, getAnalysisHistory)
 
 module.exports = router

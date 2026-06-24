@@ -8,7 +8,6 @@
 const multer         = require('multer')
 const pdfParse       = require('pdf-parse')
 const ResumeAnalysis = require('../models/ResumeAnalysis')
-const JobMatchAnalysis = require('../models/JobMatchAnalysis')
 
 // ---- MULTER CONFIGURATION ----
 // Store uploaded files in memory (as Buffer) instead of writing to disk.
@@ -34,18 +33,15 @@ module.exports.uploadMiddleware = upload.single('resume')
 // ---- SKILL DEFINITIONS ----
 // These are the skills we look for in the resume text.
 const ALL_SKILLS = {
-  programming: ['c++', 'java', 'python', 'javascript', 'typescript', 'c language', ' c,', '\nc,', 'golang', 'kotlin', 'swift', 'ruby', 'php'],
+  programming: ['c++', 'java', 'python', 'javascript', 'c language', ' c,', '\nc,', 'golang', 'kotlin', 'swift', 'ruby', 'php'],
   web:         ['html', 'css', 'react', 'node.js', 'nodejs', 'express', 'mongodb', 'angular', 'vue', 'next.js', 'nextjs'],
   placement:   ['dsa', 'data structures', 'algorithms', 'oop', 'oops', 'dbms', 'sql', 'mysql', 'postgresql', 'operating systems', 'computer networks', 'networking', 'git', 'github'],
   tools:       ['docker', 'linux', 'aws', 'firebase', 'redux', 'rest api', 'restful'],
-  softSkills:  ['communication', 'communication skills', 'english', 'leadership', 'teamwork', 'problem solving', 'problem-solving'],
-  dataAi:      ['machine learning', 'tensorflow', 'pytorch', 'scikit-learn', 'data science', 'artificial intelligence', 'ai'],
 }
 
 // Flatten into a single list with display names
 const SKILL_DISPLAY = {
   'c++': 'C++', 'java': 'Java', 'python': 'Python', 'javascript': 'JavaScript',
-  'typescript': 'TypeScript',
   'c language': 'C', ' c,': 'C', '\nc,': 'C', 'golang': 'Go', 'kotlin': 'Kotlin',
   'html': 'HTML', 'css': 'CSS', 'react': 'React', 'node.js': 'Node.js', 'nodejs': 'Node.js',
   'express': 'Express.js', 'mongodb': 'MongoDB', 'angular': 'Angular', 'vue': 'Vue.js',
@@ -56,33 +52,11 @@ const SKILL_DISPLAY = {
   'computer networks': 'Computer Networks', 'networking': 'Networking',
   'git': 'Git', 'github': 'GitHub', 'docker': 'Docker', 'linux': 'Linux',
   'aws': 'AWS', 'firebase': 'Firebase', 'redux': 'Redux', 'rest api': 'REST API',
-  'restful': 'RESTful API', 'communication': 'Communication',
-  'communication skills': 'Communication', 'english': 'English',
-  'leadership': 'Leadership', 'teamwork': 'Teamwork',
-  'problem solving': 'Problem Solving', 'problem-solving': 'Problem Solving',
-  'machine learning': 'Machine Learning', 'tensorflow': 'TensorFlow',
-  'pytorch': 'PyTorch', 'scikit-learn': 'Scikit-learn',
-  'data science': 'Data Science', 'artificial intelligence': 'AI', 'ai': 'AI',
+  'restful': 'RESTful API',
 }
 
 // Important placement skills that should ideally appear
 const KEY_PLACEMENT_SKILLS = ['React', 'Node.js', 'MongoDB', 'DSA', 'SQL', 'Git', 'GitHub', 'Python', 'Java', 'OOP', 'DBMS']
-
-function extractSkillsFromText(text) {
-  const lower = (text || '').toLowerCase()
-  const foundSkills = new Set()
-
-  for (const skillList of Object.values(ALL_SKILLS)) {
-    for (const skill of skillList) {
-      if (lower.includes(skill)) {
-        const displayName = SKILL_DISPLAY[skill]
-        if (displayName) foundSkills.add(displayName)
-      }
-    }
-  }
-
-  return [...foundSkills]
-}
 
 // ---- CORE ANALYSIS FUNCTION ----
 function analyzeResumeText(text) {
@@ -209,84 +183,6 @@ const analyzeResume = async (req, res) => {
 }
 
 // -----------------------------------------------
-// @desc    Match a resume PDF against a job description
-// @route   POST /api/resume/job-match
-// @access  Private
-// -----------------------------------------------
-const matchJobDescription = async (req, res) => {
-  try {
-    if (!req.file) {
-      return res.status(400).json({ message: 'No file uploaded. Please upload a PDF.' })
-    }
-
-    const { companyName, jobDescription } = req.body
-
-    if (!jobDescription || jobDescription.trim().length < 20) {
-      return res.status(400).json({ message: 'Please provide a valid job description.' })
-    }
-
-    const pdfData = await pdfParse(req.file.buffer)
-    const resumeText = pdfData.text
-
-    if (!resumeText || resumeText.trim().length < 50) {
-      return res.status(400).json({ message: 'Could not read text from the PDF. Please ensure it is a text-based (not scanned) PDF.' })
-    }
-
-    const resumeSkills = extractSkillsFromText(resumeText)
-    const jobSkills = extractSkillsFromText(jobDescription)
-
-    const matchedSkills = jobSkills.filter(skill => resumeSkills.includes(skill))
-    const missingSkills = jobSkills.filter(skill => !resumeSkills.includes(skill))
-
-    const resumeLower = resumeText.toLowerCase()
-    const missingKeywords = [...new Set(
-      jobDescription
-        .toLowerCase()
-        .replace(/[^a-z0-9\s+#.]/g, ' ')
-        .split(/\s+/)
-        .filter(word => word.length >= 4 && !resumeLower.includes(word))
-    )].slice(0, 12)
-
-    const matchScore = jobSkills.length
-      ? Math.round((matchedSkills.length / jobSkills.length) * 100)
-      : 0
-
-    const recommendations = []
-    if (missingSkills.length) {
-      recommendations.push(`Add or highlight these job-relevant skills: ${missingSkills.slice(0, 6).join(', ')}.`)
-    }
-    if (missingKeywords.length) {
-      recommendations.push(`Include relevant job-description keywords where truthful: ${missingKeywords.slice(0, 6).join(', ')}.`)
-    }
-    if (matchedSkills.length < 3) {
-      recommendations.push('Add more concrete project or experience bullet points that map directly to the job description.')
-    }
-    if (matchScore >= 70) {
-      recommendations.push('Your resume has a strong skill match. Tailor the summary and project bullets to this company role.')
-    }
-
-    const analysis = await JobMatchAnalysis.create({
-      user: req.user._id,
-      companyName: companyName || 'N/A',
-      jobDescription,
-      matchScore,
-      matchedSkills,
-      missingSkills,
-      missingKeywords,
-      recommendations,
-    })
-
-    res.status(200).json({
-      message: 'Job match analysis completed successfully',
-      analysis,
-    })
-  } catch (error) {
-    console.error('Job match analysis error:', error.message)
-    res.status(500).json({ message: 'Server error during job match analysis. Please try again.' })
-  }
-}
-
-// -----------------------------------------------
 // @desc    Get the most recent resume analysis for the user
 // @route   GET /api/resume/latest
 // @access  Private
@@ -325,4 +221,4 @@ const getAnalysisHistory = async (req, res) => {
   }
 }
 
-module.exports = { analyzeResume, getLatestAnalysis, getAnalysisHistory, matchJobDescription, uploadMiddleware: upload.single('resume') }
+module.exports = { analyzeResume, getLatestAnalysis, getAnalysisHistory, uploadMiddleware: upload.single('resume') }

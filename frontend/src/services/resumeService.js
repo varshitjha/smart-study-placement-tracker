@@ -19,9 +19,20 @@ export const uploadAndAnalyzeResume = (file) => {
 }
 
 // GET /api/resume/latest
-// Returns the most recent analysis for the logged-in user
 export const getLatestAnalysis = () => api.get('/resume/latest')
 
 // GET /api/resume/history
-// Returns list of all past analyses (summary only)
 export const getAnalysisHistory = () => api.get('/resume/history')
+
+// POST /api/resume/job-match
+export const matchJobDescription = (file, companyName, jobDescription) => {
+  const formData = new FormData()
+
+  formData.append('resume', file)
+  formData.append('companyName', companyName)
+  formData.append('jobDescription', jobDescription)
+
+  return api.post('/resume/job-match', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  })
+}

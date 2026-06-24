@@ -20,6 +20,12 @@ import './css/goals.css'
 import './css/resume.css'
 import './css/dashboard2b.css'
 
+// Phase 2C CSS
+import './css/jobmatch.css'
+
+// Phase 2D CSS
+import './css/atsDashboard.css'
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
