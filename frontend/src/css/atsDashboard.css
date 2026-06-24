@@ -6,8 +6,8 @@
 
 .ats-score-card,
 .ats-card {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
   border-radius: 20px;
   box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
 }
@@ -50,7 +50,7 @@
 
 .ats-score-copy h3,
 .ats-section-heading h3 {
-  color: #111827;
+  color: var(--color-text);
   margin: 6px 0 0;
 }
 
@@ -59,7 +59,7 @@
 }
 
 .ats-score-copy p {
-  color: #4b5563;
+  color: var(--color-text-secondary);
   font-size: 15px;
   line-height: 1.7;
   margin: 12px 0 0;
@@ -67,7 +67,7 @@
 }
 
 .ats-meta {
-  color: #6b7280;
+  color: var(--color-text-muted);
   font-size: 13px;
   margin-top: 12px;
 }
@@ -109,7 +109,7 @@
 }
 
 .ats-progress-bg {
-  stroke: rgba(226, 232, 240, 0.95);
+  stroke: var(--color-border);
 }
 
 .ats-progress-value {
@@ -131,7 +131,7 @@
 }
 
 .ats-score-card--good stop:first-child {
-  stop-color: #fbbf24;
+  stop-color: #fdba74;
 }
 
 .ats-score-card--good stop:nth-child(2) {
@@ -140,6 +140,18 @@
 
 .ats-score-card--good stop:last-child {
   stop-color: #ea580c;
+}
+
+.ats-score-card--average stop:first-child {
+  stop-color: #fde68a;
+}
+
+.ats-score-card--average stop:nth-child(2) {
+  stop-color: #eab308;
+}
+
+.ats-score-card--average stop:last-child {
+  stop-color: #ca8a04;
 }
 
 .ats-score-card--needs-improvement stop:first-child {
@@ -156,7 +168,7 @@
 
 .ats-score-inner {
   align-items: center;
-  background: rgba(255, 255, 255, 0.92);
+  background: color-mix(in srgb, var(--color-card) 92%, transparent);
   border-radius: 999px;
   box-shadow: inset 0 0 0 1px rgba(226, 232, 240, 0.9), 0 12px 28px rgba(15, 23, 42, 0.08);
   display: flex;
@@ -172,13 +184,13 @@
 }
 
 .ats-score-inner strong {
-  color: #111827;
+  color: var(--color-text);
   font-size: 40px;
   line-height: 1;
 }
 
 .ats-score-inner span {
-  color: #6b7280;
+  color: var(--color-text-secondary);
   font-size: 11px;
   font-weight: 800;
   line-height: 1.2;
@@ -219,6 +231,10 @@
 
 .ats-score-card--good .ats-grade-badge::before {
   background: linear-gradient(145deg, rgba(249, 115, 22, 0.92), rgba(194, 65, 12, 0.72));
+}
+
+.ats-score-card--average .ats-grade-badge::before {
+  background: linear-gradient(145deg, rgba(234, 179, 8, 0.94), rgba(161, 98, 7, 0.74));
 }
 
 .ats-score-card--needs-improvement .ats-grade-badge::before {
@@ -281,10 +297,10 @@
 }
 
 .ats-summary-item {
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
   border-radius: 14px;
-  color: #374151;
+  color: var(--color-text-secondary);
   line-height: 1.6;
   padding: 14px;
 }
@@ -306,7 +322,7 @@
 
 .ats-breakdown-row {
   align-items: center;
-  color: #374151;
+  color: var(--color-text-secondary);
   display: flex;
   font-weight: 700;
   justify-content: space-between;
@@ -314,7 +330,7 @@
 }
 
 .ats-progress-track {
-  background: #e5e7eb;
+  background: var(--color-border);
   border-radius: 999px;
   height: 12px;
   overflow: hidden;
@@ -351,7 +367,7 @@
 }
 
 .ats-empty-text {
-  color: #6b7280;
+  color: var(--color-text-muted);
   margin: 16px 0 0;
 }
 
@@ -410,8 +426,8 @@
 
 .ats-suggestion {
   align-items: flex-start;
-  background: #f8fafc;
-  border: 1px solid #e5e7eb;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
   border-radius: 16px;
   display: flex;
   gap: 12px;
@@ -433,29 +449,66 @@
 }
 
 .ats-suggestion p {
-  color: #374151;
+  color: var(--color-text-secondary);
   line-height: 1.6;
   margin: 0;
 }
 
 .ats-example-box {
-  background: #eef2ff;
-  border: 1px solid #c7d2fe;
+  background: var(--color-primary-light);
+  border: 1px solid var(--color-border);
   border-radius: 18px;
   margin-top: 20px;
   padding: 18px;
 }
 
 .ats-example-box h4 {
-  color: #312e81;
+  color: var(--color-primary);
   margin: 0 0 12px;
 }
 
 .ats-example-box ul {
-  color: #3730a3;
+  color: var(--color-text-secondary);
   line-height: 1.7;
   margin: 0;
   padding-left: 20px;
+}
+
+[data-theme="dark"] .ats-score-card::before {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.18), rgba(16, 185, 129, 0.08));
+}
+
+[data-theme="dark"] .ats-score-card,
+[data-theme="dark"] .ats-card,
+[data-theme="dark"] .resume-how-it-works,
+[data-theme="dark"] .resume-upload-area,
+[data-theme="dark"] .resume-score-card,
+[data-theme="dark"] .job-match-form,
+[data-theme="dark"] .job-match-result,
+[data-theme="dark"] .skill-section,
+[data-theme="dark"] .recommendations {
+  background: var(--color-card);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .job-match-form input,
+[data-theme="dark"] .job-match-form textarea {
+  background: var(--color-bg);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .company-name,
+[data-theme="dark"] .none,
+[data-theme="dark"] .job-match-form input::placeholder,
+[data-theme="dark"] .job-match-form textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+[data-theme="dark"] .resume-upload-area:hover,
+[data-theme="dark"] .resume-upload-area--dragging {
+  background: var(--color-primary-light);
 }
 
 @media (max-width: 960px) {

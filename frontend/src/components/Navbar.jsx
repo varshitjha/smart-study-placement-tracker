@@ -6,8 +6,11 @@
 // Reads user data from localStorage (saved during login/register).
 
 import React from 'react'
+import { useTheme } from '../context/ThemeContext.jsx'
 
 function Navbar({ pageTitle }) {
+  const { isDarkMode, toggleTheme } = useTheme()
+
   // Read user data that was stored in localStorage during login or register
   // If nothing is stored, default to an empty object to avoid errors
   const user = JSON.parse(localStorage.getItem('user') || '{}')
@@ -25,6 +28,17 @@ function Navbar({ pageTitle }) {
 
       {/* Right side: user info */}
       <div className="navbar-right">
+        <button
+          type="button"
+          className="theme-toggle-btn"
+          onClick={toggleTheme}
+          aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+          title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+        >
+          <span className="theme-toggle-icon">{isDarkMode ? '☀' : '☾'}</span>
+          <span className="theme-toggle-label">{isDarkMode ? 'Light' : 'Dark'}</span>
+        </button>
+
         <div className="navbar-user">
           {/* Avatar circle showing first letter of name */}
           <div className="navbar-avatar">

@@ -210,6 +210,10 @@
   z-index:         90;
 }
 
+[data-theme="dark"] .navbar {
+  background: rgba(15, 23, 42, 0.92);
+}
+
 .navbar-page-title {
   font-size:    1.05rem;
   font-weight:  800;
@@ -227,6 +231,44 @@
   display:     flex;
   align-items: center;
   gap:         10px;
+}
+
+.theme-toggle-btn {
+  display:       inline-flex;
+  align-items:   center;
+  gap:           8px;
+  padding:       8px 12px;
+  border:        1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background:    var(--color-card);
+  color:         var(--color-text);
+  font-size:     0.82rem;
+  font-weight:   700;
+  box-shadow:    var(--shadow-sm);
+  transition:    var(--transition);
+}
+
+.theme-toggle-btn:hover {
+  border-color: var(--color-primary);
+  color:        var(--color-primary);
+  transform:    translateY(-1px);
+}
+
+.theme-toggle-icon {
+  align-items:     center;
+  background:      var(--color-primary-light);
+  border-radius:   50%;
+  color:           var(--color-primary);
+  display:         inline-flex;
+  font-size:       0.9rem;
+  height:          22px;
+  justify-content: center;
+  line-height:     1;
+  width:           22px;
+}
+
+.theme-toggle-label {
+  line-height: 1;
 }
 
 /* Avatar circle — shows first letter of name */
@@ -302,6 +344,11 @@
   .navbar {
     left: 0;
     padding: 0 var(--space-md);
+  }
+
+  .theme-toggle-label,
+  .navbar-username {
+    display: none;
   }
 
   .page-content {
